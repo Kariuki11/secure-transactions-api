@@ -133,7 +133,7 @@ MongoDB
 1. **Clone or navigate to the project directory**
 
 ```bash
-cd Payment-system
+cd secure-transactions-api
 ```
 
 2. **Install dependencies**
