@@ -622,7 +622,7 @@ Expiry: Any future date
 PIN: Any 4 digits
 
 ---
-
+<!-- 
 ## 🔧 Environment Variables
 
 | Variable | Description | Example |
@@ -633,7 +633,7 @@ PIN: Any 4 digits
 | `PAYSTACK_SECRET_KEY` | Paystack secret key (test) | `sk_test_xxxxx` |
 | `PAYSTACK_PUBLIC_KEY` | Paystack public key (test) | `pk_test_xxxxx` |
 
----
+--- -->
 
 ## Testing the API
 
