@@ -16,8 +16,21 @@ const PAYSTACK_BASE_URL = 'https://api.paystack.co';
  * Returns the Authorization header with Bearer token for Paystack API requests.
  */
 const getAuthHeader = () => {
+  // Get and trim the secret key to remove any whitespace
+  const secretKey = process.env.PAYSTACK_SECRET_KEY?.trim();
+  
+  // Validate that the key exists
+  if (!secretKey) {
+    throw new Error('PAYSTACK_SECRET_KEY is not set in environment variables');
+  }
+  
+  // Validate key format (should start with sk_test_ or sk_live_)
+  if (!secretKey.startsWith('sk_test_') && !secretKey.startsWith('sk_live_')) {
+    throw new Error('PAYSTACK_SECRET_KEY format is invalid. It should start with sk_test_ or sk_live_');
+  }
+  
   return {
-    Authorization: `Bearer ${process.env.PAYSTACK_SECRET_KEY}`,
+    Authorization: `Bearer ${secretKey}`,
     'Content-Type': 'application/json',
   };
 };
@@ -38,6 +51,11 @@ const getAuthHeader = () => {
  */
 const initializeTransaction = async (paymentData) => {
   try {
+    // Validate required fields
+    if (!paymentData.amount || !paymentData.email || !paymentData.reference) {
+      throw new Error('Missing required payment data: amount, email, or reference');
+    }
+
     const response = await axios.post(
       `${PAYSTACK_BASE_URL}/transaction/initialize`,
       {
@@ -56,15 +74,26 @@ const initializeTransaction = async (paymentData) => {
     // Handle Paystack API errors
     if (error.response) {
       // Paystack returned an error response
-      throw new Error(
-        error.response.data?.message || 'Failed to initialize payment with Paystack'
-      );
+      const errorData = error.response.data;
+      const errorMessage = errorData?.message || 'Failed to initialize payment with Paystack';
+      
+      // Log detailed error for debugging (only in development)
+      if (process.env.NODE_ENV !== 'production') {
+        console.error('Paystack API Error:', {
+          status: error.response.status,
+          statusText: error.response.statusText,
+          message: errorMessage,
+          data: errorData,
+        });
+      }
+      
+      throw new Error(errorMessage);
     } else if (error.request) {
       // Request was made but no response received
-      throw new Error('Network error: Could not reach Paystack API');
+      throw new Error('Network error: Could not reach Paystack API. Please check your internet connection.');
     } else {
-      // Something else happened
-      throw new Error('Error initializing payment: ' + error.message);
+      // Something else happened (like validation error from getAuthHeader)
+      throw error;
     }
   }
 };
@@ -81,6 +110,10 @@ const initializeTransaction = async (paymentData) => {
  */
 const verifyTransaction = async (reference) => {
   try {
+    if (!reference) {
+      throw new Error('Transaction reference is required');
+    }
+
     const response = await axios.get(
       `${PAYSTACK_BASE_URL}/transaction/verify/${reference}`,
       {
@@ -93,16 +126,29 @@ const verifyTransaction = async (reference) => {
     // Handle Paystack API errors
     if (error.response) {
       const statusCode = error.response.status;
+      const errorData = error.response.data;
+      const errorMessage = errorData?.message || 'Failed to verify transaction with Paystack';
+      
       if (statusCode === 404) {
         throw new Error('Transaction not found. Invalid reference.');
       }
-      throw new Error(
-        error.response.data?.message || 'Failed to verify transaction with Paystack'
-      );
+      
+      // Log detailed error for debugging (only in development)
+      if (process.env.NODE_ENV !== 'production') {
+        console.error('Paystack API Error:', {
+          status: statusCode,
+          statusText: error.response.statusText,
+          message: errorMessage,
+          data: errorData,
+        });
+      }
+      
+      throw new Error(errorMessage);
     } else if (error.request) {
-      throw new Error('Network error: Could not reach Paystack API');
+      throw new Error('Network error: Could not reach Paystack API. Please check your internet connection.');
     } else {
-      throw new Error('Error verifying payment: ' + error.message);
+      // Something else happened (like validation error from getAuthHeader)
+      throw error;
     }
   }
 };

@@ -111,7 +111,13 @@ const initiatePayment = async (req, res) => {
       transaction.paystackData = { error: paystackError.message };
       await transaction.save();
 
-      return res.status(500).json({
+      // Log error for debugging
+      console.error('Paystack initialization error:', paystackError.message);
+
+      // Return appropriate status code based on error type
+      const statusCode = paystackError.message.includes('PAYSTACK_SECRET_KEY') ? 500 : 500;
+      
+      return res.status(statusCode).json({
         success: false,
         message: paystackError.message || 'Failed to initialize payment with Paystack',
       });
