@@ -2,7 +2,7 @@
 
 A production-inspired REST API built with Node.js, Express, and MongoDB that demonstrates secure authentication, role-based access control (RBAC), and Paystack payment integration.
 
-## 📋 Table of Contents
+<!-- ## 📋 Table of Contents
 
 - [Overview](#overview)
 - [Features](#features)
@@ -20,7 +20,7 @@ A production-inspired REST API built with Node.js, Express, and MongoDB that dem
 
 ---
 
-## 🎯 Overview
+## 🎯 Overview -->
 
 This REST API provides:
 
@@ -33,21 +33,21 @@ The system follows a **layered architecture** pattern for clear separation of co
 
 ---
 
-## ✨ Features
+## Features
 
-- ✅ JWT-based authentication
-- ✅ Password hashing with bcrypt (12 salt rounds)
-- ✅ Role-based access control (Admin/User)
-- ✅ Paystack payment integration (test mode)
-- ✅ Transaction verification and storage
-- ✅ Comprehensive error handling
-- ✅ Input validation
-- ✅ MongoDB with Mongoose ODM
-- ✅ Clean, documented codebase
+- JWT-based authentication
+- Password hashing with bcrypt (12 salt rounds)
+- Role-based access control (Admin/User)
+- Paystack payment integration (test mode)
+- Transaction verification and storage
+- Comprehensive error handling
+- Input validation
+- MongoDB with Mongoose ODM
+- Clean, documented codebase
 
 ---
 
-## 🛠 Tech Stack
+## Tech Stack
 
 ### Core Technologies
 
@@ -105,7 +105,7 @@ Payment-system/
 **Layered Architecture (MVC-inspired)**
 
 ```
-Client Request
+Client Request (I've not implemented this yet.)
     ↓
 Routes (HTTP layer)
     ↓
@@ -204,6 +204,18 @@ You should see:
   "timestamp": "2024-01-01T12:00:00.000Z"
 }
 ```
+
+7. **Access Swagger Documentation**
+
+Visit: `http://localhost:5000/api-docs`
+
+This provides interactive API documentation where you can:
+- View all endpoints with detailed descriptions
+- Test endpoints directly in your browser
+- See request/response examples
+- Understand authentication flow
+
+📖 **See [SWAGGER_GUIDE.md](./SWAGGER_GUIDE.md) for detailed instructions on using Swagger.**
 
 ---
 
@@ -624,6 +636,29 @@ PIN: Any 4 digits
 ---
 
 ## 🧪 Testing the API
+
+### 🎯 Recommended: Using Swagger UI (Easiest Method)
+
+**Access Swagger Documentation:**
+```
+http://localhost:5000/api-docs
+```
+
+Swagger provides:
+- ✅ Interactive API testing in your browser
+- ✅ Complete endpoint documentation
+- ✅ Request/response examples
+- ✅ Built-in authentication
+- ✅ No need for Postman or other tools
+
+**Quick Start:**
+1. Open `http://localhost:5000/api-docs` in your browser
+2. Register a user using `POST /api/auth/register`
+3. Copy the token from the response
+4. Click "Authorize" button → Enter: `Bearer YOUR_TOKEN`
+5. Test all protected endpoints!
+
+📖 **See [SWAGGER_GUIDE.md](./SWAGGER_GUIDE.md) for detailed Swagger instructions.**
 
 ### Using Postman/Thunder Client
 
