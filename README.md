@@ -554,7 +554,7 @@ Tokens expire after **7 days**. User must login again to get a new token.
 
 ---
 
-## 👥 Authorization (RBAC)
+<!-- ## 👥 Authorization (RBAC)
 
 ### Roles
 
@@ -579,7 +579,7 @@ Tokens expire after **7 days**. User must login again to get a new token.
 2. **roleMiddleware**: Checks if user's role is in allowed roles list
 3. **Access Denied**: Returns 403 if role doesn't match
 
----
+--- -->
 
 ## Payment Flow
 
