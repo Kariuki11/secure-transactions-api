@@ -29,7 +29,7 @@ This REST API provides:
 - **Payment Processing**: Integration with Paystack (test mode) for payment transactions
 - **Transaction Management**: Persistent storage and retrieval of payment transactions
 
-The system follows a **layered architecture** pattern for clear separation of concerns and maintainability.
+<!-- The system follows a **layered architecture** pattern for clear separation of concerns and maintainability.
 
 ---
 
@@ -45,7 +45,7 @@ The system follows a **layered architecture** pattern for clear separation of co
 - MongoDB with Mongoose ODM
 - Clean, documented codebase
 
----
+--- -->
 
 ## Tech Stack
 
@@ -69,7 +69,7 @@ The system follows a **layered architecture** pattern for clear separation of co
 
 ---
 
-## 📁 Project Structure
+<!-- ## 📁 Project Structure
 
 ```
 Payment-system/
@@ -98,7 +98,7 @@ Payment-system/
 ├── .gitignore                   # Git ignore rules
 ├── package.json                 # Dependencies and scripts
 └── README.md                    # This file
-```
+``` -->
 
 ### Architecture Pattern
 
@@ -120,7 +120,7 @@ MongoDB
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -215,11 +215,11 @@ This provides interactive API documentation where you can:
 - See request/response examples
 - Understand authentication flow
 
-📖 **See [SWAGGER_GUIDE.md](./SWAGGER_GUIDE.md) for detailed instructions on using Swagger.**
+<!-- **See [SWAGGER_GUIDE.md](./SWAGGER_GUIDE.md) for detailed instructions on using Swagger.** -->
 
 ---
 
-## 📚 API Documentation
+## API Documentation
 
 ### Base URL
 
@@ -529,7 +529,7 @@ Authorization: Bearer <token>
 
 ---
 
-## 🔐 Authentication
+## Authentication
 
 ### How It Works
 
@@ -581,7 +581,7 @@ Tokens expire after **7 days**. User must login again to get a new token.
 
 ---
 
-## 💳 Payment Flow
+## Payment Flow
 
 ### Complete Payment Process
 
@@ -635,9 +635,9 @@ PIN: Any 4 digits
 
 ---
 
-## 🧪 Testing the API
+## Testing the API
 
-### 🎯 Recommended: Using Swagger UI (Easiest Method)
+### Recommended: Using Swagger UI (Easiest Method)
 
 **Access Swagger Documentation:**
 ```
@@ -645,11 +645,11 @@ http://localhost:5000/api-docs
 ```
 
 Swagger provides:
-- ✅ Interactive API testing in your browser
-- ✅ Complete endpoint documentation
-- ✅ Request/response examples
-- ✅ Built-in authentication
-- ✅ No need for Postman or other tools
+- Interactive API testing in your browser
+- Complete endpoint documentation
+- Request/response examples
+- Built-in authentication
+- No need for Postman or other tools
 
 **Quick Start:**
 1. Open `http://localhost:5000/api-docs` in your browser
@@ -658,7 +658,6 @@ Swagger provides:
 4. Click "Authorize" button → Enter: `Bearer YOUR_TOKEN`
 5. Test all protected endpoints!
 
-📖 **See [SWAGGER_GUIDE.md](./SWAGGER_GUIDE.md) for detailed Swagger instructions.**
 
 ### Using Postman/Thunder Client
 
@@ -701,7 +700,7 @@ curl -X GET http://localhost:5000/api/auth/me \
 
 ---
 
-## ⚠️ Error Handling
+## Error Handling
 
 ### Error Response Format
 
@@ -742,81 +741,3 @@ When validation fails, additional `errors` object is included:
 
 ---
 
-## 🔒 Security Considerations
-
-### Implemented Security Measures
-
-1. **Password Hashing**: bcrypt with 12 salt rounds
-2. **JWT Tokens**: Secure token-based authentication
-3. **Environment Variables**: Sensitive data stored in `.env`
-4. **Input Validation**: Server-side validation on all endpoints
-5. **RBAC**: Server-side role enforcement
-6. **Password Exclusion**: Passwords never returned in API responses
-7. **Error Messages**: No sensitive information leaked in errors
-
-### Best Practices
-
-- ✅ Never commit `.env` file to version control
-- ✅ Use strong, random `JWT_SECRET`
-- ✅ Use HTTPS in production
-- ✅ Implement rate limiting in production
-- ✅ Use Paystack webhooks for production (instead of polling)
-- ✅ Regularly update dependencies
-
----
-
-## 📝 Code Documentation
-
-All code files include:
-
-- **JSDoc comments** explaining functions and parameters
-- **Inline comments** for complex logic
-- **Clear variable names** following conventions
-- **Error handling** with descriptive messages
-
----
-
-## 🚀 Deployment Considerations
-
-### Production Checklist
-
-- [ ] Set `NODE_ENV=production`
-- [ ] Use strong `JWT_SECRET`
-- [ ] Use MongoDB Atlas or managed MongoDB
-- [ ] Enable HTTPS
-- [ ] Set up Paystack webhooks
-- [ ] Implement rate limiting
-- [ ] Add request logging
-- [ ] Set up monitoring
-- [ ] Configure CORS properly
-- [ ] Use environment-specific configs
-
----
-
-## 📞 Support
-
-For issues or questions:
-
-1. Check the error message in the API response
-2. Verify environment variables are set correctly
-3. Ensure MongoDB is running and accessible
-4. Verify Paystack keys are correct (test mode)
-
----
-
-## 📄 License
-
-This project is for educational/demonstration purposes.
-
----
-
-## 🎓 Learning Resources
-
-- [Express.js Documentation](https://expressjs.com/)
-- [Mongoose Documentation](https://mongoosejs.com/)
-- [JWT.io](https://jwt.io/)
-- [Paystack API Documentation](https://paystack.com/docs/api/)
-
----
-
-**Built with ❤️ following production best practices**
